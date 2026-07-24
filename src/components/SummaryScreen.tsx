@@ -121,7 +121,7 @@ export function SummaryScreen({ groups, onReset, onBack }: { groups: PhotoGroup[
                   letterSpacing: '.04em',
                 }}
               >
-                {copied ? 'Copied ✓' : 'Copy all'}
+                {copied ? 'Copied ✓' : 'Copy all filenames'}
               </button>
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: 3 }}>
