@@ -158,18 +158,27 @@ export function ReviewScreen({ groups, onDone }: { groups: PhotoGroup[]; onDone:
 
   /* ── Shared action buttons ── */
   const actionButtons = (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 40, padding: '14px 0', flexShrink: 0 }}>
-      <button onClick={() => decide('rejected')} disabled={rejectDisabled}
-        style={{ ...circleBtn('rgba(226,72,60,.12)', '#E2483C', 56, rejectDisabled), boxShadow: 'none', border: rejectDisabled ? 'none' : '1px solid rgba(226,72,60,.35)' }}>
-        <XIcon size="46%" color="currentColor" />
-      </button>
-      <button onClick={() => decide('kept')} disabled={keepDisabled} style={circleBtn('#4C7A6B', '#fff', 64, keepDisabled)}>
-        <HeartIcon size="46%" color="currentColor" />
-      </button>
-      <button onClick={undo} disabled={undoDisabled}
-        style={{ ...circleBtn('transparent', '#8a8580', 56, undoDisabled), background: 'transparent', boxShadow: 'none', border: 'none' }}>
-        <UndoIcon size="calc(58% - 6px)" color="currentColor" />
-      </button>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 40, padding: '10px 0 14px', flexShrink: 0 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+        <button onClick={() => decide('rejected')} disabled={rejectDisabled}
+          style={{ ...circleBtn('rgba(226,72,60,.12)', '#E2483C', 56, rejectDisabled), boxShadow: 'none', border: rejectDisabled ? 'none' : '1px solid rgba(226,72,60,.35)' }}>
+          <XIcon size="46%" color="currentColor" />
+        </button>
+        <span style={{ fontSize: 11, fontWeight: 600, color: rejectDisabled ? 'rgba(255,255,255,.15)' : 'rgba(255,255,255,.4)', letterSpacing: '.02em' }}>← Nah</span>
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+        <button onClick={() => decide('kept')} disabled={keepDisabled} style={circleBtn('#4C7A6B', '#fff', 64, keepDisabled)}>
+          <HeartIcon size="46%" color="currentColor" />
+        </button>
+        <span style={{ fontSize: 11, fontWeight: 600, color: keepDisabled ? 'rgba(255,255,255,.15)' : 'rgba(255,255,255,.4)', letterSpacing: '.02em' }}>Keep →</span>
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+        <button onClick={undo} disabled={undoDisabled}
+          style={{ ...circleBtn('transparent', '#8a8580', 56, undoDisabled), background: 'transparent', boxShadow: 'none', border: 'none' }}>
+          <UndoIcon size="calc(58% - 6px)" color="currentColor" />
+        </button>
+        <span style={{ fontSize: 11, fontWeight: 600, color: undoDisabled ? 'rgba(255,255,255,.15)' : 'rgba(255,255,255,.4)', letterSpacing: '.02em' }}>Undo</span>
+      </div>
     </div>
   );
 
