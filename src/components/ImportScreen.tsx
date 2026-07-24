@@ -153,9 +153,6 @@ export function ImportScreen({ onStart }: { onStart: (photos: Photo[]) => void }
             </div>
             <div style={{ ...checkBase, background: ACCENT, opacity: source === 'local' ? 1 : 0 }}>✓</div>
           </div>
-          <div style={{ fontSize: 11, color: 'rgba(255,255,255,.3)', padding: '6px 14px', fontWeight: 500 }}>
-            🔒 Original files are never modified
-          </div>
         </div>
       </div>
 
@@ -165,6 +162,16 @@ export function ImportScreen({ onStart }: { onStart: (photos: Photo[]) => void }
         <button onClick={handleLocalStart} disabled={startDisabled} style={startButtonStyle}>
           {busy ? 'Importing…' : 'Start review'}
         </button>
+      )}
+
+      {source === 'local' && (
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, fontSize: 11, color: 'rgba(255,255,255,.3)', fontWeight: 500, marginTop: -16 }}>
+          <svg width="11" height="13" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="5" y="11" width="14" height="10" rx="2" fill="currentColor"/>
+            <path d="M8 11V7a4 4 0 0 1 8 0v4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none"/>
+          </svg>
+          Original files are never modified
+        </div>
       )}
 
     </div>
