@@ -115,7 +115,7 @@ export function ImportScreen({ onStart }: { onStart: (photos: Photo[]) => void }
             </div>
             <div style={{ padding: '0 14px 14px' }}>
               <button onClick={handleDriveSignIn} disabled={busy !== null} style={actionBtn(busy !== null)}>
-                {busy === 'drive' ? <>Connecting…</> : <>{googleLogo} Sign in &amp; choose folder</>}
+                {busy === 'drive' ? <>Connecting…</> : <>{googleLogo} Import from a shared Google Drive folder</>}
               </button>
             </div>
           </div>
