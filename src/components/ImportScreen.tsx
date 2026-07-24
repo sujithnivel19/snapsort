@@ -84,7 +84,6 @@ export function ImportScreen({ onStart }: { onStart: (photos: Photo[]) => void }
     background: disabled ? 'rgba(255,255,255,.06)' : '#fff',
     color: disabled ? 'rgba(255,255,255,.3)' : '#171410',
     border: 'none',
-    borderTop: '1px solid rgba(255,255,255,.08)',
     cursor: disabled ? 'not-allowed' : 'pointer',
     fontSize: 13, fontWeight: 700,
     display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
@@ -99,7 +98,7 @@ export function ImportScreen({ onStart }: { onStart: (photos: Photo[]) => void }
             Pick your best photos,<br />one swipe at a time.
           </h1>
           <p style={{ margin: '16px 0 0', fontSize: '14.5px', lineHeight: 1.55, color: 'rgba(255,255,255,.56)' }}>
-            Pull in a shoot and Snapsort sorts every frame by pose, so you review one set at a time — no scrolling a flat folder.
+            Sort loads of photos with a simple swipe.
           </p>
         </div>
 
@@ -114,9 +113,11 @@ export function ImportScreen({ onStart }: { onStart: (photos: Photo[]) => void }
                 <div style={{ fontSize: 12, color: 'rgba(255,255,255,.5)', marginTop: 2 }}>Import from a shared shoot folder</div>
               </div>
             </div>
-            <button onClick={handleDriveSignIn} disabled={busy !== null} style={actionBtn(busy !== null)}>
-              {busy === 'drive' ? <>Connecting…</> : <>{googleLogo} Sign in &amp; choose folder</>}
-            </button>
+            <div style={{ padding: '0 14px 14px' }}>
+              <button onClick={handleDriveSignIn} disabled={busy !== null} style={actionBtn(busy !== null)}>
+                {busy === 'drive' ? <>Connecting…</> : <>{googleLogo} Sign in &amp; choose folder</>}
+              </button>
+            </div>
           </div>
 
           {/* Local folder */}
@@ -128,9 +129,11 @@ export function ImportScreen({ onStart }: { onStart: (photos: Photo[]) => void }
                 <div style={{ fontSize: 12, color: 'rgba(255,255,255,.5)', marginTop: 2 }}>Point at a folder on this device</div>
               </div>
             </div>
-            <button onClick={handleLocalStart} disabled={busy !== null} style={actionBtn(busy !== null)}>
-              {busy === 'local' ? 'Importing…' : 'Choose folder'}
-            </button>
+            <div style={{ padding: '0 14px 14px' }}>
+              <button onClick={handleLocalStart} disabled={busy !== null} style={actionBtn(busy !== null)}>
+                {busy === 'local' ? 'Importing…' : 'Choose folder'}
+              </button>
+            </div>
           </div>
         </div>
 
