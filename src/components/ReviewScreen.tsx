@@ -13,7 +13,7 @@ export function ReviewScreen({ groups, onDone }: { groups: PhotoGroup[]; onDone:
   const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768);
   const activeThumbRef = useRef<HTMLDivElement>(null);
   onDoneRef.current = onDone;
-  const { state, decide, undo, selectTab, selectThumb, onPointerDown, onPointerMove, onPointerUp } = useReview(groups);
+  const { state, decide, undo, selectThumb, onPointerDown, onPointerMove, onPointerUp } = useReview(groups);
   const { groups: g, groupIndex, photoIndex, history, dragX, dragging, noTransition, undoing, done, deciding } = state;
 
   useEffect(() => {
