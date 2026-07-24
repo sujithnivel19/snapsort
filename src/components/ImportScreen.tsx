@@ -39,7 +39,7 @@ const steps = [
     label: 'Swipe', sub: 'Keep or skip each photo',
     icon: (
       <div style={{ position: 'relative', width: 22, height: 22, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ width: 14, height: 18, border: '2px solid #fff', borderRadius: 3, animation: 'swipeDemo 2.8s ease-in-out infinite' }} />
+        <div style={{ width: 14, height: 18, border: '2px solid #fff', borderRadius: 3 }} />
         <svg style={{ position: 'absolute', left: 0, top: '50%', transform: 'translateY(-50%)' }} width="7" height="12" viewBox="0 0 7 12" fill="none"><path d="M6 1L1 6l5 5" stroke="rgba(255,255,255,.5)" strokeWidth="1.5" strokeLinecap="round"/></svg>
         <svg style={{ position: 'absolute', right: 0, top: '50%', transform: 'translateY(-50%)' }} width="7" height="12" viewBox="0 0 7 12" fill="none"><path d="M1 1l5 5-5 5" stroke="rgba(255,255,255,.5)" strokeWidth="1.5" strokeLinecap="round"/></svg>
       </div>
