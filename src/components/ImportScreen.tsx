@@ -1,9 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { Photo } from '../lib/types';
 import { pickLocalFolder } from '../lib/localImport';
 import { signInAndPickFolder, preloadDriveScripts } from '../lib/drive';
-
-const ACCENT = '#3D7BE8';
 
 const iconBox: React.CSSProperties = {
   width: 38, height: 38,
@@ -30,9 +28,63 @@ const folderIcon = (
 );
 
 
+const ACCENT = '#3D7BE8';
+
+const steps = [
+  {
+    label: 'Import', sub: 'From Drive or your device',
+    icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3v13M7 11l5 5 5-5" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M5 20h14" stroke="#fff" strokeWidth="2" strokeLinecap="round"/></svg>,
+  },
+  {
+    label: 'Swipe', sub: 'Keep or skip each photo',
+    icon: (
+      <div style={{ position: 'relative', width: 22, height: 22, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ width: 14, height: 18, border: '2px solid #fff', borderRadius: 3, animation: 'swipeDemo 2.8s ease-in-out infinite' }} />
+        <svg style={{ position: 'absolute', left: 0, top: '50%', transform: 'translateY(-50%)' }} width="7" height="12" viewBox="0 0 7 12" fill="none"><path d="M6 1L1 6l5 5" stroke="rgba(255,255,255,.5)" strokeWidth="1.5" strokeLinecap="round"/></svg>
+        <svg style={{ position: 'absolute', right: 0, top: '50%', transform: 'translateY(-50%)' }} width="7" height="12" viewBox="0 0 7 12" fill="none"><path d="M1 1l5 5-5 5" stroke="rgba(255,255,255,.5)" strokeWidth="1.5" strokeLinecap="round"/></svg>
+      </div>
+    ),
+  },
+  {
+    label: 'Save', sub: 'Export your kept photos',
+    icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3v13M7 11l5 5 5-5" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" transform="scale(1,-1) translate(0,-24)"/><path d="M5 20h14" stroke="#fff" strokeWidth="2" strokeLinecap="round"/></svg>,
+  },
+];
+
+function HowItWorks() {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+      <div style={{ fontSize: 11, letterSpacing: '.14em', textTransform: 'uppercase', color: 'rgba(255,255,255,.35)', fontWeight: 700, marginBottom: 28 }}>How it works</div>
+      {steps.map((step, i) => (
+        <div key={step.label}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+            <div style={{ width: 48, height: 48, borderRadius: 12, background: ACCENT, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              {step.icon}
+            </div>
+            <div>
+              <div style={{ fontSize: 15, fontWeight: 700, color: '#fff' }}>{step.label}</div>
+              <div style={{ fontSize: 12.5, color: 'rgba(255,255,255,.45)', marginTop: 2 }}>{step.sub}</div>
+            </div>
+          </div>
+          {i < steps.length - 1 && (
+            <div style={{ marginLeft: 23, height: 36, borderLeft: '2px dashed rgba(255,255,255,.12)' }} />
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export function ImportScreen({ onStart }: { onStart: (photos: Photo[]) => void }) {
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState<'drive' | 'local' | null>(null);
+  const [isWide, setIsWide] = useState(() => window.innerWidth >= 900);
+
+  useEffect(() => {
+    const handler = () => setIsWide(window.innerWidth >= 900);
+    window.addEventListener('resize', handler);
+    return () => window.removeEventListener('resize', handler);
+  }, []);
 
   async function handleDriveSignIn() {
     setError(null);
@@ -81,8 +133,13 @@ export function ImportScreen({ onStart }: { onStart: (photos: Photo[]) => void }
   });
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
-      <div style={{ width: '100%', maxWidth: 600, padding: '52px 26px', display: 'flex', flexDirection: 'column', gap: 30 }}>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', padding: '40px 26px' }}>
+      {isWide && (
+        <div style={{ flex: '0 0 320px', marginRight: 64, paddingTop: 8 }}>
+          <HowItWorks />
+        </div>
+      )}
+      <div style={{ width: '100%', maxWidth: 480, display: 'flex', flexDirection: 'column', gap: 30 }}>
         <div>
           <div style={{ fontSize: 12, letterSpacing: '.16em', textTransform: 'uppercase', color: ACCENT, fontWeight: 800 }}>Snapsort</div>
           <h1 style={{ margin: '10px 0 0', fontSize: 30, fontWeight: 800, lineHeight: 1.16, color: '#fff' }}>

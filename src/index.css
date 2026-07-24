@@ -37,5 +37,17 @@ body {
   to { transform: rotate(360deg); }
 }
 
+@keyframes swipeDemo {
+  0%   { transform: translateX(0) rotate(0deg); opacity: 1; }
+  30%  { transform: translateX(38px) rotate(6deg); opacity: 1; }
+  45%  { transform: translateX(60px) rotate(9deg); opacity: 0; }
+  46%  { transform: translateX(0) rotate(0deg); opacity: 0; }
+  50%  { transform: translateX(0) rotate(0deg); opacity: 1; }
+  70%  { transform: translateX(-38px) rotate(-6deg); opacity: 1; }
+  85%  { transform: translateX(-60px) rotate(-9deg); opacity: 0; }
+  86%  { transform: translateX(0) rotate(0deg); opacity: 0; }
+  100% { transform: translateX(0) rotate(0deg); opacity: 1; }
+}
+
 a { color: #3D7BE8; }
 a:hover { color: #ffb84d; }
