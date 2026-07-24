@@ -95,7 +95,17 @@ export function ImportScreen({ onStart }: { onStart: (photos: Photo[]) => void }
         {/* Google Drive */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
           <div onClick={() => { setSource(source === 'drive' ? null : 'drive'); preloadDriveScripts(); }} style={cardStyle(source === 'drive')}>
-            <div style={iconBox}>GD</div>
+            <div style={iconBox}>
+              {/* Google Drive logo */}
+              <svg width="20" height="18" viewBox="0 0 87.3 78" xmlns="http://www.w3.org/2000/svg">
+                <path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8h-27.5c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/>
+                <path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44a9.06 9.06 0 0 0 -1.2 4.5h27.5z" fill="#00ac47"/>
+                <path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.502l5.852 11.5z" fill="#ea4335"/>
+                <path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z" fill="#00832d"/>
+                <path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#2684fc"/>
+                <path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00"/>
+              </svg>
+            </div>
             <div style={{ flex: 1 }}>
               <div style={{ fontSize: '14.5px', fontWeight: 700, color: '#fff' }}>Google Drive</div>
               <div style={{ fontSize: 12, color: 'rgba(255,255,255,.5)', marginTop: 2 }}>Import from a shared shoot folder</div>
@@ -130,13 +140,22 @@ export function ImportScreen({ onStart }: { onStart: (photos: Photo[]) => void }
         </div>
 
         {/* Local folder */}
-        <div onClick={() => setSource('local')} style={cardStyle(source === 'local')}>
-          <div style={iconBox}>FS</div>
-          <div style={{ flex: 1 }}>
-            <div style={{ fontSize: '14.5px', fontWeight: 700, color: '#fff' }}>Local folder</div>
-            <div style={{ fontSize: 12, color: 'rgba(255,255,255,.5)', marginTop: 2 }}>Point at a folder on this device</div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+          <div onClick={() => setSource('local')} style={cardStyle(source === 'local')}>
+            <div style={iconBox}>
+              <svg width="20" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 6.5C2 5.4 2.9 4.5 4 4.5H9.17C9.7 4.5 10.21 4.71 10.59 5.09L11.91 6.41C12.29 6.79 12.8 7 13.33 7H20C21.1 7 22 7.9 22 9V17.5C22 18.6 21.1 19.5 20 19.5H4C2.9 19.5 2 18.6 2 17.5V6.5Z" fill="#F5A028" fillOpacity="0.9"/>
+              </svg>
+            </div>
+            <div style={{ flex: 1 }}>
+              <div style={{ fontSize: '14.5px', fontWeight: 700, color: '#fff' }}>Local folder</div>
+              <div style={{ fontSize: 12, color: 'rgba(255,255,255,.5)', marginTop: 2 }}>Point at a folder on this device</div>
+            </div>
+            <div style={{ ...checkBase, background: ACCENT, opacity: source === 'local' ? 1 : 0 }}>✓</div>
           </div>
-          <div style={{ ...checkBase, background: ACCENT, opacity: source === 'local' ? 1 : 0 }}>✓</div>
+          <div style={{ fontSize: 11, color: 'rgba(255,255,255,.3)', padding: '6px 14px', fontWeight: 500 }}>
+            🔒 Original files are never modified
+          </div>
         </div>
       </div>
 
@@ -148,9 +167,6 @@ export function ImportScreen({ onStart }: { onStart: (photos: Photo[]) => void }
         </button>
       )}
 
-      <div style={{ fontSize: 12, color: 'rgba(255,255,255,.35)', textAlign: 'center', marginTop: source === 'local' ? -14 : 0 }}>
-        Photos are grouped automatically by pose before review.
-      </div>
     </div>
     </div>
   );

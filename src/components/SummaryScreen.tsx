@@ -126,11 +126,14 @@ export function SummaryScreen({ groups, onReset, onBack }: { groups: PhotoGroup[
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: 3 }}>
               {keptPhotos.map((photo) => (
-                <div key={photo.id} style={{ position: 'relative', aspectRatio: '1', overflow: 'hidden', background: '#1c1a17' }}>
+                <div key={photo.id} style={{ position: 'relative', aspectRatio: '1', overflow: 'hidden', background: '#1c1a17', cursor: 'zoom-in' }}
+                  onMouseEnter={e => (e.currentTarget.querySelector('img') as HTMLImageElement).style.transform = 'scale(1.08)'}
+                  onMouseLeave={e => (e.currentTarget.querySelector('img') as HTMLImageElement).style.transform = 'scale(1)'}
+                >
                   <img
                     src={photo.thumbSrc}
                     alt={photo.filename}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform .3s ease' }}
                   />
                   <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '10px 4px 3px', background: 'linear-gradient(transparent, rgba(0,0,0,.7))', fontSize: 8, color: 'rgba(255,255,255,.8)', fontWeight: 500, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                     {photo.filename}
