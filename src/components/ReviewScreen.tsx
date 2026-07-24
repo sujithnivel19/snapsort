@@ -3,7 +3,7 @@ import type { PhotoGroup } from '../lib/types';
 import { useReview } from '../lib/useReview';
 import { HeartIcon, UndoIcon, XIcon } from './Icons';
 
-const ACCENT = '#F5A028';
+const ACCENT = '#3D7BE8';
 const CARD_ASPECT = '4 / 5';
 
 export function ReviewScreen({ groups, onDone }: { groups: PhotoGroup[]; onDone: (groups: PhotoGroup[]) => void }) {

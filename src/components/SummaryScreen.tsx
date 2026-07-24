@@ -61,7 +61,7 @@ export function SummaryScreen({ groups, onReset, onBack }: { groups: PhotoGroup[
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M15 5L9 12L15 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
           </button>
           <div>
-            <div style={{ fontSize: 12, letterSpacing: '.16em', textTransform: 'uppercase', color: '#F5A028', fontWeight: 800 }}>Review complete</div>
+            <div style={{ fontSize: 12, letterSpacing: '.16em', textTransform: 'uppercase', color: '#3D7BE8', fontWeight: 800 }}>Review complete</div>
             <h1 style={{ margin: '6px 0 0', fontSize: 26, fontWeight: 800, lineHeight: 1.2 }}>{totalPhotos} photos sorted.</h1>
           </div>
         </div>
@@ -113,7 +113,7 @@ export function SummaryScreen({ groups, onReset, onBack }: { groups: PhotoGroup[
                 style={{
                   background: 'none',
                   border: '1px solid rgba(255,255,255,.15)',
-                  color: copied ? '#F5A028' : 'rgba(255,255,255,.6)',
+                  color: copied ? '#3D7BE8' : 'rgba(255,255,255,.6)',
                   fontSize: 11,
                   fontWeight: 700,
                   padding: '4px 10px',
@@ -156,9 +156,9 @@ export function SummaryScreen({ groups, onReset, onBack }: { groups: PhotoGroup[
           disabled={saving === 'saving' || totalKept === 0}
           style={{
             padding: 16,
-            background: saving === 'done' ? 'rgba(245,160,40,.15)' : '#F5A028',
+            background: saving === 'done' ? 'rgba(61,123,232,.15)' : '#3D7BE8',
             border: 'none',
-            color: saving === 'done' ? '#F5A028' : '#000',
+            color: saving === 'done' ? '#3D7BE8' : '#000',
             fontSize: 14,
             fontWeight: 700,
             cursor: totalKept === 0 || saving === 'saving' ? 'not-allowed' : 'pointer',

@@ -3,11 +3,11 @@ import type { Photo } from '../lib/types';
 import { pickLocalFolder } from '../lib/localImport';
 import { signInAndPickFolder, preloadDriveScripts } from '../lib/drive';
 
-const ACCENT = '#F5A028';
+const ACCENT = '#3D7BE8';
 
 const iconBox: React.CSSProperties = {
   width: 38, height: 38,
-  background: 'rgba(245,160,40,.14)',
+  background: 'rgba(61,123,232,.14)',
   display: 'flex', alignItems: 'center', justifyContent: 'center',
   flex: 'none',
 };
@@ -25,7 +25,7 @@ const driveIcon = (
 
 const folderIcon = (
   <svg width="20" height="18" viewBox="0 0 24 24" fill="none">
-    <path d="M2 6.5C2 5.4 2.9 4.5 4 4.5H9.17C9.7 4.5 10.21 4.71 10.59 5.09L11.91 6.41C12.29 6.79 12.8 7 13.33 7H20C21.1 7 22 7.9 22 9V17.5C22 18.6 21.1 19.5 20 19.5H4C2.9 19.5 2 18.6 2 17.5V6.5Z" fill="#F5A028" fillOpacity="0.9"/>
+    <path d="M2 6.5C2 5.4 2.9 4.5 4 4.5H9.17C9.7 4.5 10.21 4.71 10.59 5.09L11.91 6.41C12.29 6.79 12.8 7 13.33 7H20C21.1 7 22 7.9 22 9V17.5C22 18.6 21.1 19.5 20 19.5H4C2.9 19.5 2 18.6 2 17.5V6.5Z" fill="#3D7BE8" fillOpacity="0.9"/>
   </svg>
 );
 

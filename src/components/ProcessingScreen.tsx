@@ -45,7 +45,7 @@ export function ProcessingScreen() {
           style={{
             position: 'absolute',
             inset: 0,
-            border: '2px solid rgba(245,160,40,.12)',
+            border: '2px solid rgba(61,123,232,.12)',
             borderRadius: '50%',
           }}
         />
@@ -54,7 +54,7 @@ export function ProcessingScreen() {
             position: 'absolute',
             inset: 0,
             border: '2px solid transparent',
-            borderTopColor: '#F5A028',
+            borderTopColor: '#3D7BE8',
             borderRadius: '50%',
             animation: 'spin .9s linear infinite',
           }}
@@ -64,7 +64,7 @@ export function ProcessingScreen() {
             position: 'absolute',
             inset: 6,
             border: '1.5px solid transparent',
-            borderTopColor: 'rgba(245,160,40,.4)',
+            borderTopColor: 'rgba(61,123,232,.4)',
             borderRadius: '50%',
             animation: 'spin 1.4s linear infinite reverse',
           }}
@@ -95,7 +95,7 @@ export function ProcessingScreen() {
               width: i === stageIndex ? 18 : 5,
               height: 5,
               borderRadius: 3,
-              background: i === stageIndex ? '#F5A028' : i < stageIndex ? 'rgba(245,160,40,.35)' : 'rgba(255,255,255,.12)',
+              background: i === stageIndex ? '#3D7BE8' : i < stageIndex ? 'rgba(61,123,232,.35)' : 'rgba(255,255,255,.12)',
               transition: 'all .3s ease',
             }}
           />
