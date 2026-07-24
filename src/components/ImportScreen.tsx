@@ -110,7 +110,7 @@ export function ImportScreen({ onStart }: { onStart: (photos: Photo[]) => void }
               <div style={iconBox}>{driveIcon}</div>
               <div style={{ flex: 1 }}>
                 <div style={{ fontSize: '14.5px', fontWeight: 700, color: '#fff' }}>Google Drive</div>
-                <div style={{ fontSize: 12, color: 'rgba(255,255,255,.5)', marginTop: 2 }}>Import from a shared shoot folder</div>
+                <div style={{ fontSize: 12, color: 'rgba(255,255,255,.5)', marginTop: 2 }}>Import from a shared Google Drive folder</div>
               </div>
             </div>
             <div style={{ padding: '0 14px 14px' }}>
