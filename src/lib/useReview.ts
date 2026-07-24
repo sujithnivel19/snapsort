@@ -13,9 +13,9 @@ export interface ReviewState {
   noTransition: boolean;
   undoing: boolean;
   done: boolean;
+  deciding: 'kept' | 'rejected' | null;
 }
 
-/** Mirrors the Component class state machine from Snapsort.dc.html exactly. */
 export function useReview(initialGroups: PhotoGroup[]) {
   const [state, setState] = useState<ReviewState>({
     groups: initialGroups,
@@ -27,6 +27,7 @@ export function useReview(initialGroups: PhotoGroup[]) {
     noTransition: false,
     undoing: false,
     done: false,
+    deciding: null,
   });
   const startXRef = useRef(0);
 
@@ -40,9 +41,9 @@ export function useReview(initialGroups: PhotoGroup[]) {
         groupIndex += 1;
         photoIndex = 0;
       } else {
-        return { ...s, done: true, dragX: 0 };
+        return { ...s, done: true, dragX: 0, deciding: null };
       }
-      return { ...s, groupIndex, photoIndex, dragX: 0, noTransition: true };
+      return { ...s, groupIndex, photoIndex, dragX: 0, noTransition: true, deciding: null };
     });
   }, []);
 
@@ -59,8 +60,9 @@ export function useReview(initialGroups: PhotoGroup[]) {
     }
   }, [state.noTransition]);
 
+  // source: 'button' = popup 150ms then slide; 'swipe' = immediate slide
   const decide = useCallback(
-    (status: Exclude<PhotoStatus, 'pending'>) => {
+    (status: Exclude<PhotoStatus, 'pending'>, source: 'button' | 'swipe' = 'button') => {
       setState((s) => {
         if (s.dragging) return s;
         const group = s.groups[s.groupIndex];
@@ -73,9 +75,25 @@ export function useReview(initialGroups: PhotoGroup[]) {
             : { ...g, photos: g.photos.map((p, pi) => (pi !== s.photoIndex ? p : { ...p, status })) }
         );
         const history = [...s.history, { groupIndex: s.groupIndex, photoIndex: s.photoIndex, status }];
-        return { ...s, groups, history, dragging: false, dragX: status === 'kept' ? 600 : -600 };
+
+        if (source === 'button') {
+          // Phase 1: icon pops in, card holds still
+          return { ...s, groups, history, dragging: false, dragX: 0, deciding: status };
+        } else {
+          // Swipe: slide out immediately
+          return { ...s, groups, history, dragging: false, dragX: status === 'kept' ? 1400 : -1400, deciding: null };
+        }
       });
-      setTimeout(advance, 260);
+
+      if (source === 'button') {
+        // Phase 2 after 150ms: slide out
+        setTimeout(() => {
+          setState((s) => ({ ...s, dragX: s.deciding === 'kept' ? 600 : -600 }));
+          setTimeout(advance, 100);
+        }, 150);
+      } else {
+        setTimeout(advance, 100);
+      }
     },
     [advance]
   );
@@ -100,6 +118,7 @@ export function useReview(initialGroups: PhotoGroup[]) {
         noTransition: true,
         undoing: true,
         done: false,
+        deciding: null,
       };
     });
     requestAnimationFrame(() =>
@@ -136,10 +155,10 @@ export function useReview(initialGroups: PhotoGroup[]) {
       if (!s.dragging) return s;
       const dx = s.dragX;
       if (dx > SWIPE_THRESHOLD) {
-        queueMicrotask(() => decide('kept'));
+        queueMicrotask(() => decide('kept', 'swipe'));
         return { ...s, dragging: false };
       } else if (dx < -SWIPE_THRESHOLD) {
-        queueMicrotask(() => decide('rejected'));
+        queueMicrotask(() => decide('rejected', 'swipe'));
         return { ...s, dragging: false };
       }
       return { ...s, dragging: false, dragX: 0 };

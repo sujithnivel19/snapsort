@@ -28,11 +28,13 @@ function App() {
   }, []);
 
   return (
-    <div style={{ maxWidth: 430, margin: '0 auto', minHeight: '100vh', background: '#141210', color: '#fff', position: 'relative', overflowX: 'hidden' }}>
-      {screen === 'import' && <ImportScreen onStart={handleStart} />}
-      {screen === 'processing' && <ProcessingScreen />}
-      {screen === 'review' && <ReviewScreen groups={groups} onDone={handleReviewDone} />}
-      {screen === 'summary' && <SummaryScreen groups={groups} onReset={handleReset} />}
+    <div style={{ height: '100dvh', overflow: 'hidden', background: '#141210', color: '#fff' }}>
+      <div style={{ height: '100%', display: 'flex', flexDirection: 'column', position: 'relative' }}>
+        {screen === 'import' && <ImportScreen onStart={handleStart} />}
+        {screen === 'processing' && <ProcessingScreen />}
+        {screen === 'review' && <ReviewScreen groups={groups} onDone={handleReviewDone} />}
+        {screen === 'summary' && <SummaryScreen groups={groups} onReset={handleReset} />}
+      </div>
     </div>
   );
 }

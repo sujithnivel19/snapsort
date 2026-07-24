@@ -1,6 +1,6 @@
 import type { Photo } from './types';
 
-const THUMB_SIZE = 256;
+const THUMB_SIZE = 512;
 
 function fileToDataUrl(file: File): Promise<string> {
   return new Promise((resolve, reject) => {

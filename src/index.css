@@ -16,12 +16,10 @@ body {
 }
 
 #root {
-  width: auto;
-  max-width: none;
-  border-inline: none;
+  width: 100%;
+  height: 100dvh;
+  overflow: hidden;
   text-align: left;
-  min-height: 100svh;
-  display: block;
 }
 
 @keyframes stampPop {

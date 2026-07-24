@@ -1,7 +1,39 @@
+import { useState } from 'react';
 import type { PhotoGroup } from '../lib/types';
 import { HeartIcon, XIcon } from './Icons';
 
+async function saveKeptToFolder(groups: PhotoGroup[]) {
+  const kept = groups.flatMap((g) => g.photos.filter((p) => p.status === 'kept'));
+  const w = window as any;
+
+  if (w.showDirectoryPicker) {
+    let dir: FileSystemDirectoryHandle;
+    try {
+      dir = await w.showDirectoryPicker({ mode: 'readwrite' });
+    } catch {
+      return;
+    }
+    for (const photo of kept) {
+      const blob = await fetch(photo.src).then((r) => r.blob());
+      const fh = await dir.getFileHandle(photo.filename, { create: true });
+      const writable = await fh.createWritable();
+      await writable.write(blob);
+      await writable.close();
+    }
+  } else {
+    // Fallback: trigger individual downloads
+    for (const photo of kept) {
+      const a = document.createElement('a');
+      a.href = photo.src;
+      a.download = photo.filename;
+      a.click();
+    }
+  }
+}
+
 export function SummaryScreen({ groups, onReset }: { groups: PhotoGroup[]; onReset: () => void }) {
+  const [saving, setSaving] = useState<'idle' | 'saving' | 'done'>('idle');
+  const [copied, setCopied] = useState(false);
   const summaryRows = groups.map((g) => ({
     name: g.name,
     kept: g.photos.filter((p) => p.status === 'kept').length,
@@ -10,6 +42,15 @@ export function SummaryScreen({ groups, onReset }: { groups: PhotoGroup[]; onRes
   const totalPhotos = groups.reduce((s, g) => s + g.photos.length, 0);
   const totalKept = groups.reduce((s, g) => s + g.photos.filter((p) => p.status === 'kept').length, 0);
   const totalRejected = groups.reduce((s, g) => s + g.photos.filter((p) => p.status === 'rejected').length, 0);
+  const keptPhotos = groups.flatMap((g) => g.photos.filter((p) => p.status === 'kept'));
+
+  const copyFilenames = () => {
+    const text = keptPhotos.map((p) => p.filename).join('\n');
+    navigator.clipboard.writeText(text).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
 
   return (
     <div style={{ padding: '44px 24px', display: 'flex', flexDirection: 'column', gap: 26, minHeight: '100vh' }}>
@@ -78,21 +119,87 @@ export function SummaryScreen({ groups, onReset }: { groups: PhotoGroup[]; onRes
         ))}
       </div>
 
-      <button
-        onClick={onReset}
-        style={{
-          marginTop: 'auto',
-          padding: 16,
-          background: 'transparent',
-          border: '1px solid rgba(255,255,255,.2)',
-          color: '#fff',
-          fontSize: 14,
-          fontWeight: 700,
-          cursor: 'pointer',
-        }}
-      >
-        Start a new shoot
-      </button>
+      {keptPhotos.length > 0 && (
+        <div>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
+            <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: '.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,.4)' }}>
+              Selected files
+            </div>
+            <button
+              onClick={copyFilenames}
+              style={{
+                background: 'none',
+                border: '1px solid rgba(255,255,255,.15)',
+                color: copied ? '#F5A028' : 'rgba(255,255,255,.6)',
+                fontSize: 11,
+                fontWeight: 700,
+                padding: '4px 10px',
+                cursor: 'pointer',
+                letterSpacing: '.04em',
+              }}
+            >
+              {copied ? 'Copied ✓' : 'Copy all'}
+            </button>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+            {keptPhotos.map((photo) => (
+              <div
+                key={photo.id}
+                style={{
+                  fontSize: 12,
+                  color: 'rgba(255,255,255,.55)',
+                  fontWeight: 500,
+                  padding: '7px 10px',
+                  background: '#1c1a17',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 8,
+                }}
+              >
+                <HeartIcon size={10} color="#F5A028" />
+                {photo.filename}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: 10 }}>
+        <button
+          onClick={async () => {
+            setSaving('saving');
+            await saveKeptToFolder(groups);
+            setSaving('done');
+          }}
+          disabled={saving === 'saving' || totalKept === 0}
+          style={{
+            padding: 16,
+            background: saving === 'done' ? 'rgba(245,160,40,.15)' : '#F5A028',
+            border: 'none',
+            color: saving === 'done' ? '#F5A028' : '#000',
+            fontSize: 14,
+            fontWeight: 700,
+            cursor: totalKept === 0 || saving === 'saving' ? 'not-allowed' : 'pointer',
+            opacity: totalKept === 0 ? 0.4 : 1,
+          }}
+        >
+          {saving === 'saving' ? 'Saving…' : saving === 'done' ? `${totalKept} photos saved ✓` : `Save ${totalKept} kept photos to folder`}
+        </button>
+        <button
+          onClick={onReset}
+          style={{
+            padding: 16,
+            background: 'transparent',
+            border: '1px solid rgba(255,255,255,.2)',
+            color: '#fff',
+            fontSize: 14,
+            fontWeight: 700,
+            cursor: 'pointer',
+          }}
+        >
+          Start a new shoot
+        </button>
+      </div>
     </div>
   );
 }
