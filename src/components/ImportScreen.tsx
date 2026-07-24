@@ -135,9 +135,12 @@ export function ImportScreen({ onStart }: { onStart: (photos: Photo[]) => void }
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', padding: '40px 26px' }}>
       {isWide && (
-        <div style={{ flex: '0 0 320px', marginRight: 64, paddingTop: 8 }}>
-          <HowItWorks />
-        </div>
+        <>
+          <div style={{ flex: '0 0 320px', marginRight: 48, paddingTop: 8 }}>
+            <HowItWorks />
+          </div>
+          <div style={{ width: 1, background: 'rgba(255,255,255,.1)', alignSelf: 'stretch', marginRight: 48, flexShrink: 0 }} />
+        </>
       )}
       <div style={{ width: '100%', maxWidth: 480, display: 'flex', flexDirection: 'column', gap: 30 }}>
         <div>
