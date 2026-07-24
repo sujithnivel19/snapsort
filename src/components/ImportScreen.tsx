@@ -81,7 +81,7 @@ export function ImportScreen({ onStart }: { onStart: (photos: Photo[]) => void }
 
   const actionBtn = (disabled: boolean): React.CSSProperties => ({
     width: '100%', padding: '10px 16px',
-    background: disabled ? 'rgba(255,255,255,.06)' : ACCENT,
+    background: disabled ? 'rgba(255,255,255,.06)' : '#fff',
     color: disabled ? 'rgba(255,255,255,.3)' : '#171410',
     border: 'none',
     borderTop: '1px solid rgba(255,255,255,.08)',
