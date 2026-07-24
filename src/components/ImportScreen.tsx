@@ -96,7 +96,7 @@ export function ImportScreen({ onStart }: { onStart: (photos: Photo[]) => void }
         <div>
           <div style={{ fontSize: 12, letterSpacing: '.16em', textTransform: 'uppercase', color: ACCENT, fontWeight: 800 }}>Snapsort</div>
           <h1 style={{ margin: '10px 0 0', fontSize: 30, fontWeight: 800, lineHeight: 1.16, color: '#fff' }}>
-            Cull your shoot,<br />one swipe at a time.
+            Pick your best photos,<br />one swipe at a time.
           </h1>
           <p style={{ margin: '16px 0 0', fontSize: '14.5px', lineHeight: 1.55, color: 'rgba(255,255,255,.56)' }}>
             Pull in a shoot and Snapsort sorts every frame by pose, so you review one set at a time — no scrolling a flat folder.
