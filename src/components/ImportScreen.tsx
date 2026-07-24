@@ -133,16 +133,16 @@ export function ImportScreen({ onStart }: { onStart: (photos: Photo[]) => void }
   });
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', padding: '40px 26px' }}>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', padding: '40px 48px' }}>
       {isWide && (
         <>
-          <div style={{ flex: '0 0 30%', paddingTop: 8, paddingRight: 48 }}>
+          <div style={{ flex: '0 0 300px', paddingTop: 8 }}>
             <HowItWorks />
           </div>
-          <div style={{ width: 1, background: 'rgba(255,255,255,.1)', alignSelf: 'stretch', marginRight: 48, flexShrink: 0 }} />
+          <div style={{ width: 1, background: 'rgba(255,255,255,.1)', alignSelf: 'stretch', margin: '0 56px', flexShrink: 0 }} />
         </>
       )}
-      <div style={{ flex: isWide ? '0 0 70%' : undefined, width: isWide ? undefined : '100%', maxWidth: isWide ? undefined : 480, display: 'flex', flexDirection: 'column', gap: 30 }}>
+      <div style={{ flex: isWide ? 1 : undefined, width: isWide ? undefined : '100%', maxWidth: isWide ? 560 : 480, display: 'flex', flexDirection: 'column', gap: 30 }}>
         <div>
           <div style={{ fontSize: 12, letterSpacing: '.16em', textTransform: 'uppercase', color: ACCENT, fontWeight: 800 }}>Snapsort</div>
           <h1 style={{ margin: '10px 0 0', fontSize: 30, fontWeight: 800, lineHeight: 1.16, color: '#fff' }}>
