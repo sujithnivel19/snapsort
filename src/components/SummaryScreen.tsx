@@ -56,15 +56,15 @@ export function SummaryScreen({ groups, onReset }: { groups: PhotoGroup[]; onRes
     <div style={{ height: '100%', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
       {/* Scrollable content */}
       <div style={{ flex: 1, overflowY: 'auto', padding: '44px 24px 24px', display: 'flex', flexDirection: 'column', gap: 26 }}>
-        <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 10 }}>
-            <button onClick={onReset} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,.5)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 5, fontSize: 12, fontWeight: 600, padding: 0, flexShrink: 0 }}>
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
-              Back
-            </button>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+          <button onClick={onReset} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,.5)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 5, fontSize: 12, fontWeight: 600, padding: 0, flexShrink: 0 }}>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            Back
+          </button>
+          <div>
             <div style={{ fontSize: 12, letterSpacing: '.16em', textTransform: 'uppercase', color: '#F5A028', fontWeight: 800 }}>Review complete</div>
+            <h1 style={{ margin: '6px 0 0', fontSize: 26, fontWeight: 800, lineHeight: 1.2 }}>{totalPhotos} photos sorted.</h1>
           </div>
-          <h1 style={{ margin: 0, fontSize: 26, fontWeight: 800, lineHeight: 1.2 }}>{totalPhotos} photos sorted.</h1>
         </div>
 
         <div style={{ display: 'flex', gap: 10 }}>
