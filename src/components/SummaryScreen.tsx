@@ -53,118 +53,100 @@ export function SummaryScreen({ groups, onReset }: { groups: PhotoGroup[]; onRes
   };
 
   return (
-    <div style={{ padding: '44px 24px', display: 'flex', flexDirection: 'column', gap: 26, minHeight: '100vh' }}>
-      <div>
-        <div style={{ fontSize: 12, letterSpacing: '.16em', textTransform: 'uppercase', color: '#F5A028', fontWeight: 800 }}>
-          Review complete
-        </div>
-        <h1 style={{ margin: '10px 0 0', fontSize: 26, fontWeight: 800, lineHeight: 1.2 }}>{totalPhotos} photos sorted.</h1>
-      </div>
-
-      <div style={{ display: 'flex', gap: 10 }}>
-        <div style={{ flex: 1, background: '#1c1a17', padding: 16, border: '1px solid rgba(255,255,255,.07)' }}>
-          <div style={{ fontSize: 22, fontWeight: 800, color: '#F5E9D6' }}>{totalKept}</div>
-          <div style={{ fontSize: '11.5px', color: 'rgba(255,255,255,.5)', marginTop: 4, fontWeight: 600 }}>Kept</div>
-        </div>
-        <div style={{ flex: 1, background: '#1c1a17', padding: 16, border: '1px solid rgba(255,255,255,.07)' }}>
-          <div style={{ fontSize: 22, fontWeight: 800, color: '#E2483C' }}>{totalRejected}</div>
-          <div style={{ fontSize: '11.5px', color: 'rgba(255,255,255,.5)', marginTop: 4, fontWeight: 600 }}>Kept aside</div>
-        </div>
-      </div>
-
-      <div style={{ display: 'flex', flexDirection: 'column', borderTop: '1px solid rgba(255,255,255,.08)' }}>
-        {summaryRows.map((row) => (
-          <div
-            key={row.name}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              padding: '14px 2px',
-              borderBottom: '1px solid rgba(255,255,255,.08)',
-            }}
-          >
-            <div style={{ fontSize: 14, fontWeight: 600 }}>{row.name}</div>
-            <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-              <div
-                style={{
-                  fontSize: 12,
-                  fontWeight: 700,
-                  color: '#F5E9D6',
-                  background: 'rgba(245,233,214,.1)',
-                  padding: '4px 8px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 4,
-                }}
-              >
-                <HeartIcon size={11} color="#F5E9D6" /> {row.kept}
-              </div>
-              <div
-                style={{
-                  fontSize: 12,
-                  fontWeight: 700,
-                  color: '#E2483C',
-                  background: 'rgba(226,72,60,.1)',
-                  padding: '4px 8px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 4,
-                }}
-              >
-                <XIcon size={11} color="#E2483C" /> {row.rejected}
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {keptPhotos.length > 0 && (
+    <div style={{ height: '100%', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+      {/* Scrollable content */}
+      <div style={{ flex: 1, overflowY: 'auto', padding: '44px 24px 24px', display: 'flex', flexDirection: 'column', gap: 26 }}>
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
-            <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: '.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,.4)' }}>
-              Selected files
-            </div>
-            <button
-              onClick={copyFilenames}
+          <div style={{ fontSize: 12, letterSpacing: '.16em', textTransform: 'uppercase', color: '#F5A028', fontWeight: 800 }}>
+            Review complete
+          </div>
+          <h1 style={{ margin: '10px 0 0', fontSize: 26, fontWeight: 800, lineHeight: 1.2 }}>{totalPhotos} photos sorted.</h1>
+        </div>
+
+        <div style={{ display: 'flex', gap: 10 }}>
+          <div style={{ flex: 1, background: '#1c1a17', padding: 16, border: '1px solid rgba(255,255,255,.07)' }}>
+            <div style={{ fontSize: 22, fontWeight: 800, color: '#F5E9D6' }}>{totalKept}</div>
+            <div style={{ fontSize: '11.5px', color: 'rgba(255,255,255,.5)', marginTop: 4, fontWeight: 600 }}>Kept</div>
+          </div>
+          <div style={{ flex: 1, background: '#1c1a17', padding: 16, border: '1px solid rgba(255,255,255,.07)' }}>
+            <div style={{ fontSize: 22, fontWeight: 800, color: '#E2483C' }}>{totalRejected}</div>
+            <div style={{ fontSize: '11.5px', color: 'rgba(255,255,255,.5)', marginTop: 4, fontWeight: 600 }}>Kept aside</div>
+          </div>
+        </div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', borderTop: '1px solid rgba(255,255,255,.08)' }}>
+          {summaryRows.map((row) => (
+            <div
+              key={row.name}
               style={{
-                background: 'none',
-                border: '1px solid rgba(255,255,255,.15)',
-                color: copied ? '#F5A028' : 'rgba(255,255,255,.6)',
-                fontSize: 11,
-                fontWeight: 700,
-                padding: '4px 10px',
-                cursor: 'pointer',
-                letterSpacing: '.04em',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                padding: '14px 2px',
+                borderBottom: '1px solid rgba(255,255,255,.08)',
               }}
             >
-              {copied ? 'Copied ✓' : 'Copy all'}
-            </button>
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-            {keptPhotos.map((photo) => (
-              <div
-                key={photo.id}
+              <div style={{ fontSize: 14, fontWeight: 600 }}>{row.name}</div>
+              <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                <div style={{ fontSize: 12, fontWeight: 700, color: '#F5E9D6', background: 'rgba(245,233,214,.1)', padding: '4px 8px', display: 'flex', alignItems: 'center', gap: 4 }}>
+                  <HeartIcon size={11} color="#F5E9D6" /> {row.kept}
+                </div>
+                <div style={{ fontSize: 12, fontWeight: 700, color: '#E2483C', background: 'rgba(226,72,60,.1)', padding: '4px 8px', display: 'flex', alignItems: 'center', gap: 4 }}>
+                  <XIcon size={11} color="#E2483C" /> {row.rejected}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {keptPhotos.length > 0 && (
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
+              <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: '.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,.4)' }}>
+                Selected files
+              </div>
+              <button
+                onClick={copyFilenames}
                 style={{
-                  fontSize: 12,
-                  color: 'rgba(255,255,255,.55)',
-                  fontWeight: 500,
-                  padding: '7px 10px',
-                  background: '#1c1a17',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 8,
+                  background: 'none',
+                  border: '1px solid rgba(255,255,255,.15)',
+                  color: copied ? '#F5A028' : 'rgba(255,255,255,.6)',
+                  fontSize: 11,
+                  fontWeight: 700,
+                  padding: '4px 10px',
+                  cursor: 'pointer',
+                  letterSpacing: '.04em',
                 }}
               >
-                <HeartIcon size={10} color="#F5A028" />
-                {photo.filename}
-              </div>
-            ))}
+                {copied ? 'Copied ✓' : 'Copy all'}
+              </button>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+              {keptPhotos.map((photo) => (
+                <div
+                  key={photo.id}
+                  style={{
+                    fontSize: 12,
+                    color: 'rgba(255,255,255,.55)',
+                    fontWeight: 500,
+                    padding: '7px 10px',
+                    background: '#1c1a17',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 8,
+                  }}
+                >
+                  <HeartIcon size={10} color="#F5A028" />
+                  {photo.filename}
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
 
-      <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: 10 }}>
+      {/* Buttons pinned to bottom */}
+      <div style={{ flexShrink: 0, padding: '12px 24px 24px', display: 'flex', flexDirection: 'column', gap: 10, borderTop: '1px solid rgba(255,255,255,.06)' }}>
         <button
           onClick={async () => {
             setSaving('saving');
