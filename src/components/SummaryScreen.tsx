@@ -31,7 +31,7 @@ async function saveKeptToFolder(groups: PhotoGroup[]) {
   }
 }
 
-export function SummaryScreen({ groups, onReset }: { groups: PhotoGroup[]; onReset: () => void }) {
+export function SummaryScreen({ groups, onReset, onBack }: { groups: PhotoGroup[]; onReset: () => void; onBack: () => void }) {
   const [saving, setSaving] = useState<'idle' | 'saving' | 'done'>('idle');
   const [copied, setCopied] = useState(false);
   const summaryRows = groups.map((g) => ({
@@ -57,9 +57,8 @@ export function SummaryScreen({ groups, onReset }: { groups: PhotoGroup[]; onRes
       {/* Scrollable content */}
       <div style={{ flex: 1, overflowY: 'auto', padding: '44px 24px 24px', display: 'flex', flexDirection: 'column', gap: 26 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-          <button onClick={onReset} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,.5)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 5, fontSize: 12, fontWeight: 600, padding: 0, flexShrink: 0 }}>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
-            Back
+          <button onClick={onBack} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,.5)', cursor: 'pointer', display: 'flex', alignItems: 'center', padding: 0, flexShrink: 0 }}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M15 5L9 12L15 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
           </button>
           <div>
             <div style={{ fontSize: 12, letterSpacing: '.16em', textTransform: 'uppercase', color: '#F5A028', fontWeight: 800 }}>Review complete</div>

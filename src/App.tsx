@@ -27,13 +27,17 @@ function App() {
     setScreen('import');
   }, []);
 
+  const handleBackToReview = useCallback(() => {
+    setScreen('review');
+  }, []);
+
   return (
     <div style={{ height: '100dvh', overflow: 'hidden', background: '#141210', color: '#fff' }}>
       <div style={{ height: '100%', display: 'flex', flexDirection: 'column', position: 'relative' }}>
         {screen === 'import' && <ImportScreen onStart={handleStart} />}
         {screen === 'processing' && <ProcessingScreen />}
         {screen === 'review' && <ReviewScreen groups={groups} onDone={handleReviewDone} />}
-        {screen === 'summary' && <SummaryScreen groups={groups} onReset={handleReset} />}
+        {screen === 'summary' && <SummaryScreen groups={groups} onReset={handleReset} onBack={handleBackToReview} />}
       </div>
     </div>
   );
