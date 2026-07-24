@@ -54,8 +54,16 @@ export function SummaryScreen({ groups, onReset }: { groups: PhotoGroup[]; onRes
 
   return (
     <div style={{ height: '100%', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+      {/* Header */}
+      <div style={{ flexShrink: 0, padding: '12px 20px', display: 'flex', alignItems: 'center' }}>
+        <button onClick={onReset} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,.5)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 600, padding: 0 }}>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
+          Back
+        </button>
+      </div>
+
       {/* Scrollable content */}
-      <div style={{ flex: 1, overflowY: 'auto', padding: '44px 24px 24px', display: 'flex', flexDirection: 'column', gap: 26 }}>
+      <div style={{ flex: 1, overflowY: 'auto', padding: '8px 24px 24px', display: 'flex', flexDirection: 'column', gap: 26 }}>
         <div>
           <div style={{ fontSize: 12, letterSpacing: '.16em', textTransform: 'uppercase', color: '#F5A028', fontWeight: 800 }}>
             Review complete
