@@ -124,7 +124,7 @@ export function SummaryScreen({ groups, onReset, onBack }: { groups: PhotoGroup[
                 {copied ? 'Copied ✓' : 'Copy all'}
               </button>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 3 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: 3 }}>
               {keptPhotos.map((photo) => (
                 <div key={photo.id} style={{ position: 'relative', aspectRatio: '1', overflow: 'hidden', background: '#1c1a17' }}>
                   <img
@@ -132,6 +132,9 @@ export function SummaryScreen({ groups, onReset, onBack }: { groups: PhotoGroup[
                     alt={photo.filename}
                     style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                   />
+                  <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '10px 4px 3px', background: 'linear-gradient(transparent, rgba(0,0,0,.7))', fontSize: 8, color: 'rgba(255,255,255,.8)', fontWeight: 500, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                    {photo.filename}
+                  </div>
                 </div>
               ))}
             </div>
