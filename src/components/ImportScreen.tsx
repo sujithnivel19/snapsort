@@ -98,7 +98,7 @@ export function ImportScreen({ onStart }: { onStart: (photos: Photo[]) => void }
             Pick your best photos,<br />one swipe at a time.
           </h1>
           <p style={{ margin: '16px 0 0', fontSize: '14.5px', lineHeight: 1.55, color: 'rgba(255,255,255,.56)' }}>
-            Sort loads of photos with a simple swipe.
+            Import your photos and go through them one at a time — swipe to keep or skip, no scrolling through one long list.
           </p>
         </div>
 
