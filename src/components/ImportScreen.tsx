@@ -94,7 +94,7 @@ export function ImportScreen({ onStart }: { onStart: (photos: Photo[]) => void }
 
         {/* Google Drive */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
-          <div onClick={() => { setSource(source === 'drive' ? null : 'drive'); preloadDriveScripts(); }} style={cardStyle(source === 'drive')}>
+          <div onClick={() => { setSource(source === 'drive' ? null : 'drive'); preloadDriveScripts(); }} style={{ ...cardStyle(source === 'drive'), borderBottom: source === 'drive' ? 'none' : undefined }}>
             <div style={iconBox}>
               {/* Google Drive logo */}
               <svg width="20" height="18" viewBox="0 0 87.3 78" xmlns="http://www.w3.org/2000/svg">
@@ -114,7 +114,7 @@ export function ImportScreen({ onStart }: { onStart: (photos: Photo[]) => void }
           </div>
 
           {source === 'drive' && (
-            <div style={{ padding: '12px 14px', border: `1px solid ${ACCENT}`, borderTop: 'none', background: 'rgba(245,160,40,.04)' }}>
+            <div style={{ padding: '12px 14px', border: `1px solid ${ACCENT}`, borderTop: 'none', borderRadius: '0 0 2px 2px', background: 'rgba(245,160,40,.04)' }}>
               <button
                 onClick={handleDriveSignIn}
                 disabled={busy}
