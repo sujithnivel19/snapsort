@@ -124,24 +124,14 @@ export function SummaryScreen({ groups, onReset, onBack }: { groups: PhotoGroup[
                 {copied ? 'Copied ✓' : 'Copy all'}
               </button>
             </div>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 3 }}>
               {keptPhotos.map((photo) => (
-                <div
-                  key={photo.id}
-                  style={{
-                    fontSize: 11,
-                    color: 'rgba(255,255,255,.6)',
-                    fontWeight: 500,
-                    padding: '5px 10px',
-                    background: '#1c1a17',
-                    border: '1px solid rgba(255,255,255,.08)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 6,
-                  }}
-                >
-                  <HeartIcon size={9} color="#F5A028" />
-                  {photo.filename}
+                <div key={photo.id} style={{ position: 'relative', aspectRatio: '1', overflow: 'hidden', background: '#1c1a17' }}>
+                  <img
+                    src={photo.thumbSrc}
+                    alt={photo.filename}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                  />
                 </div>
               ))}
             </div>
