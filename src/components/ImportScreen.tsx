@@ -51,14 +51,40 @@ const steps = [
   },
 ];
 
-function HowItWorks() {
+function HowItWorks({ horizontal = false }: { horizontal?: boolean }) {
+  if (horizontal) {
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+        <div style={{ fontSize: 11, letterSpacing: '.14em', textTransform: 'uppercase', color: 'rgba(255,255,255,.35)', fontWeight: 700, marginBottom: 16, textAlign: 'center' }}>How it works</div>
+        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'center' }}>
+          {steps.map((step, i) => (
+            <div key={step.label} style={{ display: 'flex', alignItems: 'center' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, width: 90 }}>
+                <div style={{ width: 44, height: 44, borderRadius: 12, background: 'rgba(61,123,232,.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  {step.icon}
+                </div>
+                <div style={{ textAlign: 'center' }}>
+                  <div style={{ fontSize: 13, fontWeight: 700, color: '#fff' }}>{step.label}</div>
+                  <div style={{ fontSize: 11, color: 'rgba(255,255,255,.4)', marginTop: 2, lineHeight: 1.3 }}>{step.sub}</div>
+                </div>
+              </div>
+              {i < steps.length - 1 && (
+                <div style={{ width: 32, height: 2, borderTop: '2px dashed rgba(255,255,255,.12)', marginBottom: 34, flexShrink: 0 }} />
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
       <div style={{ fontSize: 11, letterSpacing: '.14em', textTransform: 'uppercase', color: 'rgba(255,255,255,.35)', fontWeight: 700, marginBottom: 28 }}>How it works</div>
       {steps.map((step, i) => (
         <div key={step.label}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-            <div style={{ width: 48, height: 48, borderRadius: 12, background: ACCENT, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            <div style={{ width: 48, height: 48, borderRadius: 12, background: 'rgba(61,123,232,.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
               {step.icon}
             </div>
             <div>
@@ -123,7 +149,9 @@ export function ImportScreen({ onStart }: { onStart: (photos: Photo[]) => void }
   };
 
   const actionBtn = (disabled: boolean): React.CSSProperties => ({
-    width: '100%', padding: '10px 16px',
+    width: '100%',
+    height: isWide ? undefined : 40,
+    padding: isWide ? '10px 16px' : '0 16px',
     background: disabled ? 'rgba(255,255,255,.06)' : '#fff',
     color: disabled ? 'rgba(255,255,255,.3)' : '#171410',
     border: 'none',
@@ -197,6 +225,11 @@ export function ImportScreen({ onStart }: { onStart: (photos: Photo[]) => void }
           </svg>
           Original files are never modified
         </div>
+        {!isWide && (
+          <div style={{ paddingTop: 36, borderTop: '1px solid rgba(255,255,255,.08)' }}>
+            <HowItWorks horizontal />
+          </div>
+        )}
       </div>
     </div>
   );
